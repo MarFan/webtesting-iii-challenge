@@ -20,4 +20,16 @@ test('The Gate is open and unlocked.', () => {
     rerender(<Dashboard locked={locked} closed={!closed} />); // start with gate closed
     fireEvent.click(getByText(/^lock gate$/i)); // lock the gate!
 
+    const closeTheGate = getByText(/^close gate$/i); // can we close the gate?
+    expect(getByText(/^lock gate$/i).disabled).toBeTruthy(); // can't click "Lock Gate"
+    //fireEvent.click(closeTheGate); // the gate is now closed!
+    fireEvent.click(getByText(/^close gate$/i)) // expect the button label to change
+    
+    getByText(/^open gate$/i);
+
+    //const closeTheGate = getByText(/^close gate$/i); // can we close the gate?
+    expect(getByText(/^lock gate$/i).disabled).toBeFalsy(); // can't click "Lock Gate"
+    fireEvent.click(getByText(/^lock gate$/i)); // the gate is now closed!
+    expect(getByText(/locked/i).getAttribute('class')).toMatch(new RegExp('red'))
+
 });

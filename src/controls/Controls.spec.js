@@ -12,8 +12,8 @@ test('Close the gate', () => {
 
     const closeTheGate = getByText(/^close gate$/i); // can we close the gate?
     expect(getByText(/^lock gate$/i).disabled).toBeTruthy(); // can't click "Lock Gate"
-    //fireEvent.click(closeTheGate); // the gate is now closed!
-    fireEvent.click(getByText(/^close gate$/i)) // expect the button label to change
+    fireEvent.click(closeTheGate); // the gate is now closed!
+    //fireEvent.click(getByText(/^close gate$/i)) // expect the button label to change
     // the gate is now closed 
 
     rerender(<Controls locked={locked} closed={!closed} />) // is the gate really closed?
